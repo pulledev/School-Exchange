@@ -47,7 +47,7 @@
 
 
     <?php
-    $db = new mysqli("localhost","root","","nwt web");
+    require('db.php');
 
     if (isset($_POST["submit"])){
       $email = $_POST["email"];
@@ -58,7 +58,7 @@
 
 
 
-      $absenden = $db->prepare("INSERT INTO get_code (email,name,question,answer) VALUES (?,?,?,?)");
+      $absenden = $mysqli->prepare("INSERT INTO get_code (email,name,question,answer) VALUES (?,?,?,?)");
       $absenden->bind_param("ssss",$email,$name,$frage,$antwort);
       $absenden->execute();
     }

@@ -50,7 +50,6 @@
     echo "Dein neuer Name ist nun: <b>".$newName."</b>";
   }
 
-
    ?>
 </body>
 </html>

@@ -1,13 +1,15 @@
-<?php
-
- ?>
 
 <?php
+/**
+ * @var $mysqli mysqli
+ */
+
 $host = "localhost";
-$name = "nwt web";
+$name = "school exchange";
 $user = "root";
-$passwort = "";
+$passwort = "mariadb";
 
-$db = new PDO("mysql:host=$host;dbname=$name", $user, $passwort);
-
- ?>
+$mysqli = mysqli_connect($host, $user, $passwort, $name);
+$PDO = new PDO("mysql:host=$host;dbname=$name", $user, $passwort);
+$test =1;
+?>

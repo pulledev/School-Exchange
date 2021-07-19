@@ -22,9 +22,9 @@
       header("Location:login.php");
       $_SESSION["noRights"] = true;
     }
-    $db = new mysqli("localhost","root","","nwt web");
+    require ("db.php");
 
-    $abfrage = $db->query("SELECT * FROM get_code ORDER BY ID DESC");
+    $abfrage = $mysqli->query("SELECT * FROM get_code ORDER BY ID DESC");
     $a=0;
     $b=0;
 

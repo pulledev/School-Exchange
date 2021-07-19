@@ -1,0 +1,14 @@
+{
+  "name": "vendor_name/school_exchange",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "pmtre",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  }
+}

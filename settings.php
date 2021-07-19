@@ -21,10 +21,6 @@
 
 <body>
 
-<?php
-require 'db.php';
-require 'function.php';
-?>
 
 <div class="headc"><h1 id="head">Einstellungen</h1></div>
 
@@ -133,6 +129,9 @@ require 'function.php';
 
 
 <?php
+require 'db.php';
+require 'function.php';
+
 if (isset($_POST["changeuser"])) {
     header("Location:changename.php");
 }

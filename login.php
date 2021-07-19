@@ -47,15 +47,17 @@ session_start();
 </div>
 
 
-<?php
-$db = new mysqli("localhost", "root", "", "nwt web");
+<?
+require ('db.php');
+
+
 
 if (isset($_POST["submit"])) {
     $upassword = $_POST["password"];
     $username = $_POST["username"];
     $password = md5($upassword);
 
-    $searchUser = $db->prepare("SELECT ID FROM user WHERE username = ?");
+    $searchUser = $mysqli->prepare("SELECT ID FROM user WHERE username = ?");
     $searchUser->bind_param("s", $username);
     $searchUser->execute();
     $searchResult = $searchUser->get_result();
@@ -64,12 +66,10 @@ if (isset($_POST["submit"])) {
     if ($searchResult->num_rows != 0) {
         $checkusername = true;
     } else {
-        ?>
-        <div id="wrong">Dieser Benutzername ist falsch</div>
-        <?php
+        echo '<div id="wrong">Dieser Benutzername ist falsch</div>';
     }
 
-    $searchPassword = $db->prepare("SELECT ID FROM user WHERE password = ?");
+    $searchPassword = $mysqli->prepare("SELECT ID FROM user WHERE password = ?");
     $searchPassword->bind_param("s", $password);
     $searchPassword->execute();
     $searchResult = $searchPassword->get_result();
@@ -77,9 +77,7 @@ if (isset($_POST["submit"])) {
     if ($searchResult->num_rows != 0) {
         $checkpassword = true;
     } else {
-        ?>
-        <div id="wrong2">Dieses Passwort existiert nicht</div>
-        <?php
+        echo '<div id="wrong2">Dieses Passwort existiert nicht</div>';
     }
 
 }
@@ -87,7 +85,7 @@ if (isset($checkpassword)) {
     if ($checkpassword == true and $checkusername == true) {
         echo '<a href="home.php"id="link">Home</a>';
 
-        $abfrage = $db->query("SELECT * FROM user WHERE ID = 4");
+        $abfrage = $mysqli->query("SELECT * FROM user WHERE ID = 4");
 
         $_SESSION["user"] = $username;
         $_SESSION["password"] = $upassword;
