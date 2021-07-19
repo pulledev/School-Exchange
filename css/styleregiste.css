@@ -1,0 +1,155 @@
+body{
+  text-align: center;
+}
+
+.headlinec{
+  font-family: 'Roboto Mono', monospace;
+  position: absolute;
+  z-index: 2;
+  top: 0.4vw;
+  right: 42.8%;
+  font-size: 1vw;
+}
+
+#headline{
+  text-align: center;
+}
+
+input[type=text] {
+  width: 20%;
+  padding: 10px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+input[type=email] {
+  width: 20%;
+  padding: 10px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+button[type=submit]{
+  width: 10%;
+  padding: 10px 10px;
+  margin: 8px 0;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+}
+
+input[type=password]{
+  width: 20%;
+  padding: 10px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+
+.login{
+  position: absolute;
+  top: 20vw;
+  right: 28vw;
+
+}
+
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 5%}
+    50%{background-position:100% 96%}
+    100%{background-position:0% 5%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 5%}
+    50%{background-position:100% 96%}
+    100%{background-position:0% 5%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 5%}
+    50%{background-position:100% 96%}
+    100%{background-position:0% 5%}
+}
+
+#codesquare{
+  height: 5vw;
+  width: 15%;
+
+  position: absolute;
+  z-index: 1;
+  border-bottom-right-radius: 0.5vw;
+  border-bottom-left-radius: 0.5vw;
+  top: 0;
+  right: 42.5%;
+  background: linear-gradient(324deg, #1dc583, #1dc5b8, #1d88c5, #77eee9);
+  background-size: 800% 800%;
+  display: inline;
+
+
+  -webkit-animation: AnimationName 25s ease infinite;
+  -moz-animation: AnimationName 25s ease infinite;
+  animation: AnimationName 25s ease infinite;
+}
+
+
+#sidesquare {
+    height: 2vw;
+    width: 10%;
+
+    position: absolute;
+    z-index: 1;
+    border-top-left-radius: 0.5vw;
+    border-bottom-left-radius: 0.5vw;
+    top: 1vw;
+    right: 0px;
+    background: linear-gradient(324deg, #1dc583, #1dc5b8, #1d88c5, #77eee9);
+    background-size: 800% 800%;
+    display: inline;
+
+
+    -webkit-animation: AnimationName 25s ease infinite;
+    -moz-animation: AnimationName 25s ease infinite;
+    animation: AnimationName 25s ease infinite;
+}
+
+#side{
+  text-decoration: none;
+  font-family: 'Roboto Mono', monospace;
+  top: 1vw;
+  right: 3vw;;
+  border-radius: 15px;
+  text-transform: uppercase;
+  font-size: 1.5vw;
+  font-weight: bold;
+  color: black;
+  z-index: 3;
+  position: absolute;
+}
+
+.backc{
+  display:  inline-block;
+  display: inline-block;
+  align-items:left;
+  text-align: left;
+  justify-content:left;
+  text-align: left;
+  margin: 250px;
+  z-index: 3;
+}
+
+#side:hover{
+  color: white;
+}
+
+#success{
+    position: absolute;
+    top: 28vw;
+    left: 30vw;
+    color: #04ff04;
+}
+#failure{
+    text-align: left;
+    color: #cd0000;
+}

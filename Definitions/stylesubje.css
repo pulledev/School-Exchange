@@ -1,0 +1,32 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+
+
+cover {
+    position: absolute;
+    text-align: center;
+    color: white;
+    z-index: 2;
+}
+.cover img {
+    height: 200px;
+    width: 100% !important;
+    object-fit: cover;
+    object-position: top center;
+
+
+}
+
+.coverText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    font-family: 'League Spartan Bold', arial;
+    color: white;
+}
+

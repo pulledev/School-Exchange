@@ -1,0 +1,42 @@
+body{
+    margin: 0;
+}
+
+.content{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 12% 13%;
+    grid-template-rows: 25% 20% 20% 15% 20%;
+    grid-template-areas:
+    "non1 head head none men"
+    "non1 slogan slogan none non2"
+    "join join join join join"
+    "join join join join join"
+    "footer footer footer footer footer";
+}
+#g1{
+    grid-area: head;
+    background-color: yellow;
+}
+#g2{
+    grid-area: slogan;
+    background-color: black;
+}
+#g3{
+    grid-area: men;
+    background-color: red;
+}
+#g4{
+    grid-area: join;
+    background-color: green;
+}
+#g5{
+    grid-area: non;
+    background-color: grey;
+}
+#g6{
+    grid-area: foter;
+    background-color: lightgrey;
+}
+

@@ -1,0 +1,200 @@
+body {
+    margin: 0;
+}
+
+.headc{
+    font-family: 'League Spartan Bold', arial, serif;
+    text-align: center;
+}
+@media screen and (max-width: 741px) {
+    .headc{
+        display: none;
+    }
+    .topnav {
+        overflow: hidden;
+        text-align: center;
+        background: linear-gradient(270deg, #36d0a8, #25d0c2, #25bfd0, #25a1d0, #258bd0, #25b0d0, #25d0ca);
+        background-size: 1400% 1400%;
+        -webkit-animation: colorAnim 30s ease infinite;
+        -moz-animation: colorAnim 30s ease infinite;
+        animation: colorAnim 30s ease infinite;
+        box-shadow: 0px 0px 4rem 1.5rem rgba(0, 0, 0, 0.2);
+    }
+
+}
+#head{
+    display: inline-block;
+    margin: 3vw;
+    padding: 0.75vw;
+    background: linear-gradient(270deg, #36d0a8, #25d0c2, #25bfd0, #25a1d0, #258bd0, #25b0d0, #25d0ca);
+    background-size: 1400% 1400%;
+    -webkit-animation: colorAnim 30s ease infinite;
+    -moz-animation: colorAnim 30s ease infinite;
+    animation: colorAnim 30s ease infinite;
+    font-size: 3rem;
+    border-radius: 1vw;
+    box-shadow: 0px 0px 4rem 1.5rem rgba(0, 0, 0, 0.2);
+
+}
+#info{
+    text-align: center;
+    padding-top: 2vh;
+    font-family: 'Lato', sans-serif;
+}
+.infoc{
+    text-align: center;
+    padding-top: 8vw;
+}
+
+
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    display:inline-block;
+    text-align: center;
+    color: black;
+    padding: 14px 15px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: 'Lato', sans-serif;
+}
+#back{
+
+}
+#headsmartphone{
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: 'League Spartan Bold', arial, serif;
+}
+/* Change the color of links on hover */
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+    display: none
+}
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: 741px) {
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+}
+@media screen and (min-width: 742px){
+    .topnav{
+        display: inline-block;
+        background-color: white;
+        float: right;
+    }
+}
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 741px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+
+    }
+    .topnav{
+        display: block;
+    }
+    .infoc{
+        padding-top: 2vw;
+    }
+    #back{
+        display: none;
+    }
+}
+
+#headsmartphone{
+    display: none;
+}
+@media screen and (max-width: 741px) {
+    #headsmartphone{
+        display: initial;
+    }
+}
+
+
+
+/*Anmelde UI*/
+
+
+
+
+
+
+
+/*background: linear-gradient(324deg, #1dc583, #1dc5b8, #1d88c5, #77eee9);
+background-size: 800% 800%;
+-webkit-animation: colorAnimation 25s ease infinite;
+-moz-animation: colorAnimation 25s ease infinite;
+animation: colorAnimation 25s ease infinite;
+display: inline;
+
+*/
+
+@-webkit-keyframes colorAnimation {
+    0% {
+        background-position: 0% 5%
+    }
+    50% {
+        background-position: 100% 96%
+    }
+    100% {
+        background-position: 0% 5%
+    }
+}
+
+@-moz-keyframes colorAnimation {
+    0% {
+        background-position: 0% 5%
+    }
+    50% {
+        background-position: 100% 96%
+    }
+    100% {
+        background-position: 0% 5%
+    }
+}
+
+@keyframes colorAnimation {
+    0% {
+        background-position: 0% 5%
+    }
+    50% {
+        background-position: 100% 96%
+    }
+    100% {
+        background-position: 0% 5%
+    }
+}
+
+@-webkit-keyframes colorAnim {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes colorAnim {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes colorAnim {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
