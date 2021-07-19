@@ -40,6 +40,10 @@
 
 <?php
 require 'db.php';
+spl_autoload_register(function ($className) {
+    error_log('autoloader:'.$className);
+    include 'classes/'.$className.'.php';
+});
 ?><h3 id="success">Dein Konto wurde erstellt!</h3><?php
 
 

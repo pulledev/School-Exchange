@@ -20,7 +20,12 @@
 </div>
 
 
-<?php session_start(); ?>
+<?php session_start();
+spl_autoload_register(function ($className) {
+    error_log('autoloader:'.$className);
+    include 'classes/'.$className.'.php';
+});
+?>
 
 
 <div class="topnav" id="myTopnav">
@@ -31,7 +36,7 @@
         <a href="forum/" id="aufnav">Forum</a>
         <a href="getcodep.php" id="admnav">Admin Panel</a>
         <a href="settings.php" id="setnav">Einstellungen</a>
-        <a href="classes/index.php">Klassen</a>
+        <a href="groups/index.php">Klassen</a>
         <a href="logout.php" id="outnav">Abmelden</a>
         <a href="javascript:void(0);" class="icon" onclick="openMenu()">
             <i class="fa fa-bars"></i>

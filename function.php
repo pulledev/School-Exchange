@@ -1,4 +1,8 @@
 <?php
+spl_autoload_register(function ($className) {
+    error_log('autoloader:'.$className);
+    include 'classes/'.$className.'.php';
+});
 function searchData($from, $input, $output)
 {
     require("db.php");

@@ -49,8 +49,10 @@ session_start();
 
 <?
 require ('db.php');
-
-
+spl_autoload_register(function ($className) {
+    error_log('autoloader:'.$className);
+    include 'classes/'.$className.'.php';
+});
 
 if (isset($_POST["submit"])) {
     $upassword = $_POST["password"];

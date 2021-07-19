@@ -18,6 +18,10 @@
   <h3 id="codeanfragen">Codeanfrage (neuste zuerst):</h3>
 
   <?php
+  spl_autoload_register(function ($className) {
+      error_log('autoloader:'.$className);
+      include 'classes/'.$className.'.php';
+  });
     if ($_SESSION["rank"]<1) {
       header("Location:login.php");
       $_SESSION["noRights"] = true;

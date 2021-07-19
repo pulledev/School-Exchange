@@ -47,7 +47,12 @@
 
 
     <?php
+    spl_autoload_register(function ($className) {
+        error_log('autoloader:'.$className);
+        include 'classes/'.$className.'.php';
+    });
     require('db.php');
+
 
     if (isset($_POST["submit"])){
       $email = $_POST["email"];

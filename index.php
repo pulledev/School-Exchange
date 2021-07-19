@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,5 +21,11 @@
 <hr>
 <a href="getcode.php">join!</a><br>
 <hr>
+<?php
+spl_autoload_register(function ($className) {
+    error_log('autoloader:'.$className);
+    include 'classes/'.$className.'.php';
+});
+?>
 </body>
 </html>

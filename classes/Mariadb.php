@@ -1,6 +1,6 @@
 <?php
 
-class mariadb
+class Mariadb
 {
     public $host = "localhost";
     public $name = "school exchange";
@@ -20,7 +20,4 @@ class mariadb
         new PDO('mysql:host=$this->host;dbname=$this->name', $this->user, $this->password);
     }
 }
-$h = new mariadb();
-$h->test();
-$h->host = "<br>testttt";
-$h->test();
+

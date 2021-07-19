@@ -1,5 +1,10 @@
 <!doctype html>
-<?php session_start();?>
+<?php session_start();
+spl_autoload_register(function ($className) {
+    error_log('autoloader:'.$className);
+    include 'classes/'.$className.'.php';
+});
+?>
 <html lang="de">
 <head>
   <meta charset="utf-8">
