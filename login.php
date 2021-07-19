@@ -39,74 +39,84 @@ session_start();
 </div>
 
 <div class="login_class">
-    <form id="login" action="" method="post">
+    <form id="login" action="login.php" method="post">
         <input type="text" name="username" placeholder="Benutzername">
         <input type="password" name="password" placeholder="Passwort"><br>
-        <button type="submit" name="submit">Anmelden</button>
+        <button type="submit" name="send">Anmelden</button>
     </form>
 </div>
 
 
-<?
-require ('db.php');
+<?php
+
+
+
 spl_autoload_register(function ($className) {
     error_log('autoloader:'.$className);
     include 'classes/'.$className.'.php';
 });
 
-if (isset($_POST["submit"])) {
-    $upassword = $_POST["password"];
+
+$datenbank = new Mariadb();
+
+
+if (isset($_POST["send"])) {
+    $datenbank = new Mariadb();
+    $mysqli = $datenbank->mysqli();
+
+    if (!$mysqli) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+
+    $rawPassword = $_POST["password"];
     $username = $_POST["username"];
-    $password = md5($upassword);
+    $password = md5($rawPassword);
 
-    $searchUser = $mysqli->prepare("SELECT ID FROM user WHERE username = ?");
-    $searchUser->bind_param("s", $username);
-    $searchUser->execute();
-    $searchResult = $searchUser->get_result();
-    $checkpassword = false;
-    $checkusername = false;
-    if ($searchResult->num_rows != 0) {
-        $checkusername = true;
+
+
+    $searchUser = $mysqli->query("SELECT * FROM user WHERE username = $username");
+    $searchPassword = $mysqli->query( "SELECT * FROM user WHERE password = $password");
+
+    $checkPassword = false;
+    $checkUsername = false;
+    $userRows = $searchUser->num_rows();
+    $passRows = $searchPassword->num_rows;
+    echo $userRows;
+
+    if ($userRows> 0 && $passRows  > 0) {
+        $checkUsername = true;
+        $checkPassword = true;
     } else {
-        echo '<div id="wrong">Dieser Benutzername ist falsch</div>';
+        echo '<h3>Der Benutzername oder das Passwort ist falsch</h3>';
     }
 
-    $searchPassword = $mysqli->prepare("SELECT ID FROM user WHERE password = ?");
-    $searchPassword->bind_param("s", $password);
-    $searchPassword->execute();
-    $searchResult = $searchPassword->get_result();
 
-    if ($searchResult->num_rows != 0) {
-        $checkpassword = true;
-    } else {
-        echo '<div id="wrong2">Dieses Passwort existiert nicht</div>';
-    }
 
 }
-if (isset($checkpassword)) {
-    if ($checkpassword == true and $checkusername == true) {
-        echo '<a href="home.php"id="link">Home</a>';
+if (isset($checkPassword)) {
+    if ($checkPassword == true && $checkUsername == true) {
+
 
         $abfrage = $mysqli->query("SELECT * FROM user WHERE ID = 4");
 
         $_SESSION["user"] = $username;
-        $_SESSION["password"] = $upassword;
+        $_SESSION["password"] = $rawPassword;
 
         $_SESSION["acc"] = true;
         header('Location:load.php');
-
     }
 }
+
+
 if (isset($_SESSION["noRights"])) {
     if ($_SESSION["noRights"] == true) {
-        echo "<h3>Du hast nicht genügend Rechte, melde dich mit einem passendem Acc an</h3>";
+        echo "<h3>Dein Acc wurde wahrscheinlich gebannt!</h3>";
     } else {
         $_SESSION["noRights"] = false;
     }
 }
 ?>
-
-
 
 </body>
 </html>
