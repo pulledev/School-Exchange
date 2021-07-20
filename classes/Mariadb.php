@@ -2,27 +2,20 @@
 
 class Mariadb
 {
-    public $host = "127.0.0.1";
-    public $name = "school_exchange";
-    public $user = "root";
-    public $password = "mariadb";
-    public $pdo;
-    public $sqli;
-    function mysqli()
-    {
-        if (!$this->sqli) {
-            error_log("Connecting to mariadb at " . $this->host);
-            $this->sqli = new mysqli($this->host, $this->user, $this->password, $this->name);
-        }
+    private $host = "127.0.0.1";
+    private $name = "school_exchange";
+    private $user = "root";
+    private $password = "mariadb";
+    private $pdo;
 
-        return $this->sqli;
-    }
 
     function pdo()
     {
-
-            $this->pdo = new PDO('mysql:host=$this->host;dbname=$this->name', $this->user, $this->password);
-
+        if (!$this->pdo) {
+            error_log("Connecting to mariadb at " . $this->host);
+            $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->name", $this->user, $this->password);
+        }
+        return $this->pdo;
     }
 
     function test()

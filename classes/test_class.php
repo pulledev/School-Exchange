@@ -5,7 +5,7 @@ spl_autoload_register(function ($className) {
     include '../classes/'.$className.'.php';
 });
 
+Head::print("test");
 
-
-$h = new Mariadb();
-$h->test();
+$h = new Navbar();
+$h->printNavbar();

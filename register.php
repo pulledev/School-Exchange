@@ -1,78 +1,22 @@
 <!doctype html>
-
 <html lang="de">
 <head>
-    <meta charset="utf-8">
-
-    <title>NWT Tausch</title>
-
-    <meta name="Paul Treier" content="Exchange Platform">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styleregiste.css">
-    <meta name="viewport" content="width=480px, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-
 <body>
-<div id="sidesquare"></div>
-<div id="codesquare"></div>
-
-<div class="headlinec">
-    <h1 id="headline">Registrieren</h1>
-</div>
-<div class="login">
-    <form id="qeingabe" action="" method="post">
-        <input type="text" name="username" placeholder="Benutzername" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Passwort" required>
-        <input type="text" name="code" placeholder="Zugangscode" required>
-        <button type="submit" name="submit"> Anmelden</button>
-        <div class="">
-
-        </div>
+<div class="container">
+    <h1>Registieren</h1>
+    <h3>Fülle das Formular aus um einen Account zu generieren</h3>
+    <form action="">
+        <input type="text" name="username" placeholder="Benutzername">
+        <input type="password" name="password" placeholder="Passwort">
+        <button type="submit" name="submit">Registrieren</button>
     </form>
 </div>
-<div class="sidec">
-    <a href="index.php" id="side">zurück</a>
-</div>
-
-<?php
-require 'db.php';
-spl_autoload_register(function ($className) {
-    error_log('autoloader:'.$className);
-    include 'classes/'.$className.'.php';
-});
-?><h3 id="success">Dein Konto wurde erstellt!</h3><?php
-
-
-if (isset($_POST["submit"])) {
-    $email = $_POST["email"];
-    $username = $_POST["username"];
-    $code = $_POST["code"];
-    $password = $_POST["password"];
-    $password = md5($password);
-
-    $searchCode = $db->prepare("SELECT ID FROM register_code WHERE code = ?");
-    $searchCode->bind_param("s", $code);
-    $searchCode->execute();
-    $searchResult = $searchCode->get_result();
-
-    if ($searchResult->num_rows != 0) {
-        $absenden = $db->prepare("INSERT INTO user (email,username,code,password) VALUES (?,?,?,?)");
-        $absenden->bind_param("ssss", $email, $username, $code, $password);
-        $absenden->execute();
-        ?><h3 id="success">Dein Konto wurde erstellt!</h3><?php
-
-        $delete = $db->prepare("DELETE FROM codes WHERE code= ? ");
-        $delete->bind_param("s", $code);
-        $delete->execute();
-
-    } else {
-        ?><h3 id="failure">Dein Code war Falsch versuche es erneut!</h3><?php
-    }
-}
-?>
 </body>
 </html>

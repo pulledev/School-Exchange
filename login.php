@@ -62,29 +62,34 @@ $datenbank = new Mariadb();
 
 if (isset($_POST["send"])) {
     $datenbank = new Mariadb();
-    $mysqli = $datenbank->mysqli();
+    $pdo = $datenbank->pdo();
 
-    if (!$mysqli) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
 
 
     $rawPassword = $_POST["password"];
     $username = $_POST["username"];
     $password = md5($rawPassword);
 
+    $searchUser = $pdo->prepare("SELECT * FROM user WHERE password = :pass");
+    $searchUser->bindParam(":pass", $password);
+    $searchUser->execute();
+
+    $searchPass = $pdo->prepare("SELECT * FROM user WHERE username = :user");
+    $searchPass->bindParam(":user", $username);
+    $searchPass->execute();
+
+    $rowPass = $searchPass->rowCount();
+    $rowUser = $searchUser->rowCount();
 
 
-    $searchUser = $mysqli->query("SELECT * FROM user WHERE username = $username");
-    $searchPassword = $mysqli->query( "SELECT * FROM user WHERE password = $password");
 
     $checkPassword = false;
     $checkUsername = false;
-    $userRows = $searchUser->num_rows();
-    $passRows = $searchPassword->num_rows;
-    echo $userRows;
+    $searchUserResult = $searchUser;
+    $userRows = $searchUser->rowCount();
 
-    if ($userRows> 0 && $passRows  > 0) {
+
+    if ($rowUser > 0 && $rowPass  > 0) {
         $checkUsername = true;
         $checkPassword = true;
     } else {
@@ -97,8 +102,9 @@ if (isset($_POST["send"])) {
 if (isset($checkPassword)) {
     if ($checkPassword == true && $checkUsername == true) {
 
+        $test = 4;
+        $abfrage = $pdo->query("SELECT * FROM user WHERE ID = $test");
 
-        $abfrage = $mysqli->query("SELECT * FROM user WHERE ID = 4");
 
         $_SESSION["user"] = $username;
         $_SESSION["password"] = $rawPassword;
@@ -107,6 +113,8 @@ if (isset($checkPassword)) {
         header('Location:load.php');
     }
 }
+
+
 
 
 if (isset($_SESSION["noRights"])) {
