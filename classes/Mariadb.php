@@ -23,5 +23,17 @@ class Mariadb
         echo $this->host;
     }
 
+    /**
+     * @return ForumQuestion[]
+     */
+    function fetchForumQuestions ()
+    {
+        $res = $this->pdo()->query("SELECT * FROM forum_quest");
+        $results = [];
+        while ($row = $res->fetch()) {
+            $results[] = new ForumQuestion($row["quest"], $row["user"], $row["sort"], $row["head"]);
+        }
+        return $results;
+    }
 }
 

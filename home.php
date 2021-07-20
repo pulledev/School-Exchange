@@ -5,5 +5,5 @@ spl_autoload_register(function ($className) {
 });
 
 
-Head::printHead("test");
+Head::printHead("test", "");
 Navbar::printNavbar("home");

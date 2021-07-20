@@ -12,6 +12,7 @@ class Navbar
         $settings = null;
         $home = null;
         $group = null;
+
         if ($active=="learn") {
             $learn = "active";
             $navTitle = "Lernen";
@@ -33,7 +34,6 @@ class Navbar
         }
 
         ?>
-
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
 
@@ -63,7 +63,9 @@ class Navbar
                             </ul>
                         </li>
 
-
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $group;?>" href="../groups/index.php">Lerngruppen</a>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link <?php echo $forum;?>" href="../forum/index.php">Forum</a>
@@ -75,13 +77,6 @@ class Navbar
                         <li class="nav-item">
                             <a class="nav-link <?php echo $settings;?>" href="../settings.php">Einstellungen</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link <?php echo $group;?>" href="../groups/index.php">Lern Gruppen</a>
-                        </li>
-
-
-
 
                     </ul>
                 </div>

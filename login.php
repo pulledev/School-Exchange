@@ -1,50 +1,16 @@
-<?php
-session_start();
-?>
+
 <!doctype html>
 
 <html lang="de">
 <head>
-    <meta charset="utf-8">
-    <title>LogIn</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/styleloginn.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
-    <link href="https://allfont.net/allfont.css?fonts=league-spartan" rel="stylesheet" type="text/css"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,100;1,300;1,400;1,900&display=swap"
-          rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <?php
+    session_start();
+    ?>
 
 </head>
 
 <body>
 
-<div class="headc"><d id="head">Anmelden</d></div>
-
-<div class="topnav">
-    <d id="headsmartphone">Anmelden</d>
-    <a href="index.php" class="icon"><span class="material-icons">arrow_back</span></a>
-</div>
-
-<div class="infoc"><b id="info">Melde dich hier an</b></div>
-
-<div class="back_class">
-    <a href="index.php" id="back">zurück</a>
-</div>
-
-<div class="login_class">
-    <form id="login" action="login.php" method="post">
-        <input type="text" name="username" placeholder="Benutzername">
-        <input type="password" name="password" placeholder="Passwort"><br>
-        <button type="submit" name="send">Anmelden</button>
-    </form>
-</div>
 
 
 <?php
