@@ -5,7 +5,5 @@ spl_autoload_register(function ($className) {
     include '../classes/'.$className.'.php';
 });
 
-Head::print("test");
-
-$h = new Navbar();
-$h->printNavbar();
+Head::printHead("test");
+Navbar::printNavbar("settings");
