@@ -60,12 +60,11 @@ class Navbar
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="../Definitions/index.php">Erklärungen</a></li>
                                 <li><a class="dropdown-item " href="#">Aufgaben</a></li>
+                                <li><a class="dropdown-item " href="../groups/index.php">Lerngruppe</a></li>
                             </ul>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link <?php echo $group;?>" href="../groups/index.php">Lerngruppen</a>
-                        </li>
+
 
                         <li class="nav-item">
                             <a class="nav-link <?php echo $forum;?>" href="../forum/index.php">Forum</a>

@@ -21,7 +21,5 @@ Head::printHead("Lerngruppen","forumIndex.css");
 
 <body>
 
-
-
 </body>
 </html>

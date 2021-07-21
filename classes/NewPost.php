@@ -1,6 +1,7 @@
 <?php
 
-class ForumQuestion
+
+class NewPost
 {
     private $question;
     private $user;
@@ -61,5 +62,6 @@ class ForumQuestion
     {
         return $this->ID;
     }
+
 
 }
