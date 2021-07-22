@@ -6,6 +6,8 @@ class Navbar
 
     static function printNavbar($active)
     {
+        $User = SchoolExchangeServices::getInstance()->getSessionManager()->getLoggedInUser();
+
         $learn = null;
         $forum = null;
         $adminPanel = null;
@@ -81,7 +83,10 @@ class Navbar
                 </div>
             </div>
         </nav>
-
         <?php
+        if ($User) {
+            echo "Hallo ".$User->getUsername() ;
+        }
+
     }
 }

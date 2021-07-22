@@ -10,7 +10,7 @@ class Config
      */
     public function __construct()
     {
-        $this->cfg = parse_ini_file("../config.ini");
+        $this->cfg = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/config.ini");
 
     }
 

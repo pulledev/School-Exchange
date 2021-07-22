@@ -33,11 +33,9 @@ Head::printHead("Forum", "forumIndex.css");
 </div>
 
 <?php
-$database = new Mariadb();
-
+$database = SchoolExchangeServices::getInstance()->getMariadb();
 
 $questions = $database->fetchForumQuestions();
-
 
 if (empty($questions)) {
     echo "<h4 class='text-center'>Es gibt zurzeit keine Fragen</h4>";

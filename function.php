@@ -5,7 +5,6 @@ spl_autoload_register(function ($className) {
 });
 function searchData($from, $input, $output)
 {
-
     // from = Spalte input
     // input = was soll es sein
     // output = welche Spalte ausgegeben wird

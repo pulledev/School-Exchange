@@ -6,6 +6,7 @@ class Head
     static function printHead($title, $cssFile)
     {
         ?>
+
         <head>
             <link rel="stylesheet" href="<?php echo $cssFile;?>">
             <link rel="icon" type="image/png" href="../pic/favicon.png">

@@ -32,11 +32,10 @@ spl_autoload_register(function ($className) {
 });
 
 
-$datenbank = new Mariadb();
+$datenbank = SchoolExchangeServices::getInstance()->getMariadb();
 
 
 if (isset($_POST["send"])) {
-    $datenbank = new Mariadb();
     $pdo = $datenbank->pdo();
 
     $rawPassword = $_POST["password"];
@@ -49,48 +48,19 @@ if (isset($_POST["send"])) {
         echo $res;
     }
 
-    $searchUser = $pdo->prepare("SELECT * FROM user WHERE password = :pass");
-    $searchUser->bindParam(":pass", $password);
-    $searchUser->execute();
+    $checkUserByName = SchoolExchangeServices::getInstance()->getMariadb()->findUserByName($username,$password);
 
-    $searchPass = $pdo->prepare("SELECT * FROM user WHERE username = :user");
-    $searchPass->bindParam(":user", $username);
-    $searchPass->execute();
 
-    $rowPass = $searchPass->rowCount();
-    $rowUser = $searchUser->rowCount();
 
-    $checkPassword = false;
-    $checkUsername = false;
-    $searchUserResult = $searchUser;
-    $userRows = $searchUser->rowCount();
-
-    if ($rowUser > 0 && $rowPass  > 0) {
-        $checkUsername = true;
-        $checkPassword = true;
+    if ($checkUserByName) {
+        $_SESSION["userID"] = $checkUserByName->getID();
+        header('Location:load.php');
     } else {
         echo '<h3>Der Benutzername oder das Passwort ist falsch</h3>';
     }
 
 }
-if (isset($checkPassword)) {
-    if ($checkPassword == true && $checkUsername == true) {
 
-        $_SESSION["user"] = $username;
-        //$_SESSION["password"] = $rawPassword;
-
-        $_SESSION["acc"] = true;
-
-        $res = $pdo->query("SELECT * FROM ");
-        $results = [];
-        while ($row = $res->fetch()) {
-            $results[] = new ForumQuestion($row["quest"], $row["user"], $row["sort"], $row["head"], $row["ID"]);
-        }
-        error_log("ID des anmeldenden: ".$id);
-        header('Location:load.php');
-
-    }
-}
 
 
 if (isset($_SESSION["noRights"])) {
@@ -100,7 +70,11 @@ if (isset($_SESSION["noRights"])) {
         $_SESSION["noRights"] = false;
     }
 }
+
+if () {
+}
 ?>
 
+if
 </body>
 </html>

@@ -1,7 +1,8 @@
 <?php
+
 class Mariadb
 {
-    private $host = "127.0.0.1";
+    private $host;
     private $name = "school_exchange";
     private $user = "root";
     private $password = "mariadb";
@@ -9,22 +10,11 @@ class Mariadb
 
     /**
      * Mariadb constructor.
+     * @param Config $config
      */
-    /*public function __construct()
+    public function __construct(Config $config)
     {
-        $config = new Config();
         $this->host = $config->getValue('dbhost');
-
-    }*/
-
-
-    function pdo()
-    {
-        if (!$this->pdo) {
-            error_log("Connecting to mariadb at " . $this->host);
-            $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->name", $this->user, $this->password);
-        }
-        return $this->pdo;
     }
 
     function test()
@@ -35,7 +25,7 @@ class Mariadb
     /**
      * @return ForumQuestion[]
      */
-    function fetchForumQuestions ()
+    function fetchForumQuestions()
     {
         $res = $this->pdo()->query("SELECT * FROM forum_quest");
         $results = [];
@@ -45,9 +35,46 @@ class Mariadb
         return $results;
     }
 
-    function insertNewQuestions ($insertSubject, $insertUserID, $insertUser, $insertSort, $insertQuest)
+    function pdo()
+    {
+        if (!$this->pdo) {
+            error_log("Connecting to mariadb at " . $this->host);
+            $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->name", $this->user, $this->password);
+        }
+        return $this->pdo;
+    }
+
+    function insertNewQuestions($insertSubject, $insertUserID, $insertUser, $insertSort, $insertQuest)
     {
         $this->pdo()->query("INSERT INTO forum_quest (head, userID, user, sort, quest) VALUES ($insertSubject, $insertUserID, $insertUser, $insertSort, $insertQuest)");
+    }
+
+
+    function findUser(int $id): ?User
+    {
+        $stmt = $this->pdo()->prepare("SELECT * FROM user WHERE ID = :value");
+        $stmt->bindParam(":value", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch();
+        if ($row) {
+            return new User($row["username"],$row["ID"], $row["rank"], $row["email"]);
+        }
+
+        return null;
+    }
+
+    function findUserByName( string $username, string $password)
+    {
+        $stmt = $this->pdo()->prepare("SELECT * FROM user WHERE username =:usr AND password =:pwd");
+        $stmt->bindParam(":usr", $username, PDO::PARAM_STR);
+        $stmt->bindParam(":pwd", $password, PDO::PARAM_STR);
+        $stmt->execute();
+        $row = $stmt->fetch();
+        if ($row) {
+            return new User($row["username"],$row["ID"], $row["rank"], $row["email"]);
+        }
+
+        return null;
     }
 }
 

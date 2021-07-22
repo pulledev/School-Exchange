@@ -57,7 +57,7 @@ class NewModal
         <?php
 
         if (isset($_POST["send"])) {
-            $database = new Mariadb();
+            $database = SchoolExchangeServices::getInstance()->getMariadb();
 
             $database->insertNewQuestions($_POST["subject"], ,$_POST["content"], $_POST["theme"], $_POST["anon"]);
         }
