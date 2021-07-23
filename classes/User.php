@@ -59,5 +59,10 @@ class User
         return $this->email;
     }
 
-
+    function render ()
+    {
+        ?>
+        <a href="mailto:<?php echo $this->getEmail()?>"><?php echo $this->getUsername()?></a>
+        <?php
+    }
 }

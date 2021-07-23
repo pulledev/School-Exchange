@@ -18,8 +18,12 @@
 
 <h1>Anmelden</h1>
 <form action="" method="post">
-    <input type="text" placeholder="Username" name="username">
-    <input type="password" placeholder="Password" name="password">
+    <label>
+        <input type="text" placeholder="Username" name="username">
+    </label>
+    <label>
+        <input type="password" placeholder="Password" name="password">
+    </label>
     <button type="submit" name="send">Anmelden</button>
 </form>
 <?php
@@ -53,6 +57,7 @@ if (isset($_POST["send"])) {
 
 
     if ($checkUserByName) {
+        error_log("Setting User ID cookie: ".$checkUserByName->getID());
         $_SESSION["userID"] = $checkUserByName->getID();
         header('Location:load.php');
     } else {
@@ -63,18 +68,13 @@ if (isset($_POST["send"])) {
 
 
 
-if (isset($_SESSION["noRights"])) {
+/*if (isset($_SESSION["noRights"])) {
     if ($_SESSION["noRights"] == true) {
         echo "<h3>Dein Acc wurde wahrscheinlich gebannt!</h3>";
     } else {
         $_SESSION["noRights"] = false;
     }
-}
-
-if () {
-}
+}*/
 ?>
-
-if
 </body>
 </html>

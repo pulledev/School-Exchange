@@ -4,8 +4,8 @@ class Mariadb
 {
     private $host;
     private $name = "school_exchange";
-    private $user = "root";
-    private $password = "mariadb";
+    private $user;
+    private $password;
     private $pdo;
 
     /**
@@ -15,6 +15,8 @@ class Mariadb
     public function __construct(Config $config)
     {
         $this->host = $config->getValue('dbhost');
+        $this->user = $config->getValue('dbuser');
+        $this->password = $config->getValue('dbpassword');
     }
 
     function test()
@@ -25,12 +27,12 @@ class Mariadb
     /**
      * @return ForumQuestion[]
      */
-    function fetchForumQuestions()
+    function listForumQuestions()
     {
-        $res = $this->pdo()->query("SELECT * FROM forum_quest");
+        $res = $this->pdo()->query("SELECT * FROM forum_quest ORDER BY ID DESC");
         $results = [];
         while ($row = $res->fetch()) {
-            $results[] = new ForumQuestion($row["quest"], $row["user"], $row["sort"], $row["head"], $row["ID"]);
+            $results[] = new ForumQuestion($row["quest"], $row["userID"], $row["sort"], $row["head"], $row["ID"]);
         }
         return $results;
     }
@@ -44,34 +46,65 @@ class Mariadb
         return $this->pdo;
     }
 
-    function insertNewQuestions($insertSubject, $insertUserID, $insertUser, $insertSort, $insertQuest)
+    function createQuestion(ForumQuestion $forumQuestion)
     {
-        $this->pdo()->query("INSERT INTO forum_quest (head, userID, user, sort, quest) VALUES ($insertSubject, $insertUserID, $insertUser, $insertSort, $insertQuest)");
+        $res = $this->pdo()->prepare("INSERT INTO forum_quest(quest, sort, head, userID) VALUES (:quest, :sort, :head, :usr)");
+        $res->bindValue("quest", $forumQuestion->getQuestion());
+        $res->bindValue("usr", $forumQuestion->getUserId());
+        $res->bindValue("sort",$forumQuestion->getCategory());
+        $res->bindValue("head",$forumQuestion->getSubject());
+        $res->execute();
     }
 
+    function createAnswer(ForumAnswer $forumAnswer)
+    {
+        $res = $this->pdo()->prepare("INSERT INTO forum_reply(answer, userId, questionId) VALUES (:answ, :usr, :questId)");
+        $res->bindValue("answ", $forumAnswer->getAnswer());
+        $res->bindValue("usr", $forumAnswer->getUserId());
+        $res->bindValue("questId",$forumAnswer->getQuestionId());
+        $res->execute();
+    }
+
+    /**
+     * @return ForumAnswer[]
+     */
+    function listAnswers(int $questionId)
+    {
+        $res = $this->pdo()->query("SELECT * FROM forum_reply WHERE questionId = ".$questionId." ORDER BY ID DESC");
+        $resultsAnswer = [];
+        while ($row = $res->fetch()) {
+            $resultsAnswer[] = new ForumAnswer($row["ID"], $row["answer"], $row["userId"], $row["questionId"]);
+
+        }
+        return $resultsAnswer;
+    }
 
     function findUser(int $id): ?User
     {
+        error_log("findUser: " . $id);
         $stmt = $this->pdo()->prepare("SELECT * FROM user WHERE ID = :value");
         $stmt->bindParam(":value", $id, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetch();
         if ($row) {
-            return new User($row["username"],$row["ID"], $row["rank"], $row["email"]);
+            error_log("Found User:" . $row["username"]);
+            return new User($row["username"], $row["ID"], $row["rank"], $row["email"]);
         }
 
         return null;
     }
 
-    function findUserByName( string $username, string $password)
+    function findUserByName(string $username, string $password)
     {
+        error_log("FindUserByName User: " . $username . " Password: " . $password);
         $stmt = $this->pdo()->prepare("SELECT * FROM user WHERE username =:usr AND password =:pwd");
         $stmt->bindParam(":usr", $username, PDO::PARAM_STR);
         $stmt->bindParam(":pwd", $password, PDO::PARAM_STR);
         $stmt->execute();
         $row = $stmt->fetch();
         if ($row) {
-            return new User($row["username"],$row["ID"], $row["rank"], $row["email"]);
+            error_log("FoundUserbyName:" . $row["username"]);
+            return new User($row["username"], $row["ID"], $row["rank"], $row["email"]);
         }
 
         return null;

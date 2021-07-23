@@ -2,22 +2,22 @@
 
 class ForumQuestion
 {
-    private $question;
-    private $user;
-    private $category;
-    private $subject;
-    private $ID;
+    private string $question;
+    private int $userId;
+    private string $category;
+    private string $subject;
+    private int $ID;
     /**
      * ForumQuestion constructor.
      * @param $question
-     * @param $user
+     * @param $userId
      * @param $category
      * @param $subject
      */
-    public function __construct($question, $user, $category, $subject, $ID)
+    public function __construct(string $question, int $userId, string $category, string $subject, int $ID)
     {
         $this->question = $question;
-        $this->user = $user;
+        $this->userId = $userId;
         $this->category = $category;
         $this->subject = $subject;
         $this->ID = $ID;
@@ -26,7 +26,7 @@ class ForumQuestion
     /**
      * @return mixed
      */
-    public function getQuestion()
+    public function getQuestion(): string
     {
         return $this->question;
     }
@@ -34,15 +34,15 @@ class ForumQuestion
     /**
      * @return mixed
      */
-    public function getUser()
+    public function getUserId(): int
     {
-        return $this->user;
+        return $this->userId;
     }
 
     /**
      * @return mixed
      */
-    public function getCategory()
+    public function getCategory(): string
     {
         return $this->category;
     }
@@ -50,14 +50,14 @@ class ForumQuestion
     /**
      * @return mixed
      */
-    public function getSubject()
+    public function getSubject():string
     {
         return $this->subject;
     }
     /**
      * @return mixed
      */
-    public function getID()
+    public function getID(): int
     {
         return $this->ID;
     }

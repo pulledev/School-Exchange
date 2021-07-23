@@ -1,9 +1,10 @@
 <?php
-spl_autoload_register(function ($className) {
-    error_log('autoloader:'.$className);
-    include 'classes/'.$className.'.php';
-});
 
+require "init.php";
+$id = SchoolExchangeServices::getInstance()->getSessionManager()->getLoggedInUser();
+if (!$id) {
+    header("Location: login.php");
+}
 
 Head::printHead("test", "");
 Navbar::printNavbar("home");

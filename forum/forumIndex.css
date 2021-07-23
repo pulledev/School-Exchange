@@ -1,8 +1,10 @@
 
 #longQuestion{
     margin-top: 4vw;
-
+    margin-bottom: 1vw;
 }
-.block{
-    padding-bottom: 1vw;
+
+.answereCard{
+    padding-top: 1.5vw;
+
 }

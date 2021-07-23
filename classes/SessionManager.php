@@ -17,12 +17,18 @@ class SessionManager
     /**
      * @return User
      */
-    public function getLoggedInUser(): User
+    public function getLoggedInUser(): ?User
     {
-        if (!$this->loggedInUser) {
-            $userID = $_SESSION["userID"];
-            if ($userID) {
-                $this->loggedInUser = $this->mariadb->findUser($userID);
+
+        error_log("getLoggedInUser");
+        
+        if (isset($_SESSION["userID"])) {
+            error_log("Found userID Session_Cookie");
+            if (!$this->loggedInUser) {
+                $userID = $_SESSION["userID"];
+                if ($userID) {
+                    $this->loggedInUser = $this->mariadb->findUser($userID);
+                }
             }
         }
         return $this->loggedInUser;
