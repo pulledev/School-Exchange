@@ -1,18 +1,14 @@
 <!doctype html>
 
 <html lang="de">
-<head>
+
     <?php
-    spl_autoload_register(function ($className) {
-        error_log('autoloader:' . $className);
-        include 'classes/' . $className . '.php';
-    });
+    require "init.php";
 
     Head::printHead("Login","css/styleLogin");
-    session_start();
     ?>
 
-</head>
+
 
 <body>
 
@@ -28,12 +24,6 @@
 </form>
 <?php
 
-
-
-spl_autoload_register(function ($className) {
-    error_log('autoloader:'.$className);
-    include 'classes/'.$className.'.php';
-});
 
 
 $datenbank = SchoolExchangeServices::getInstance()->getMariadb();
@@ -52,7 +42,7 @@ if (isset($_POST["send"])) {
         echo $res;
     }
 
-    $checkUserByName = SchoolExchangeServices::getInstance()->getMariadb()->findUserByName($username,$password);
+    $checkUserByName = ShoolExchangeServices::getInstance()->getMariadb()->findUserByName($username,$password);
 
 
 

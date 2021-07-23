@@ -1,5 +1,5 @@
-function openAnswerModal (questionID, questionText) {
-    $("#newAnswerModal #question").text(questionText)
+function openAnswerModal (questionID, questionTextHtmlId) {
+    $("#newAnswerModal #question").text($('#' + questionTextHtmlId).text())
     $("#newAnswerModal #questionId").val(questionID)
     new bootstrap.Modal(document.getElementById('newAnswerModal')).show();
 }

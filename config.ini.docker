@@ -1,0 +1,3 @@
+dbhost = school_net_mariadb
+dbuser = root
+dbpassword = mariadb

@@ -1,8 +1,8 @@
 <?php
 require "../init.php";
-$id = SchoolExchangeServices::getInstance()->getSessionManager()->getLoggedInUser();
+$currentUser = SchoolExchangeServices::getInstance()->getSessionManager()->getLoggedInUser();
 $mariadb = SchoolExchangeServices::getInstance()->getMariadb();
-if (!$id) {
+if (!$currentUser) {
     header("Location: /login.php");
 }
 
@@ -12,19 +12,28 @@ if (isset($_POST["createQuestion"])) {
     $content = $_POST["content"];
     $theme = $_POST["theme"];
     $anon = $_POST["anon"];
-    SchoolExchangeServices::getInstance()->getMariadb()->createQuestion(new ForumQuestion($content, $id->getID(), $theme, $subject, 0));
+    SchoolExchangeServices::getInstance()->getMariadb()->createQuestion(new ForumQuestion($content, $currentUser->getID(), $theme, $subject, 0));
 } elseif (isset($_POST["createAnswer"])) {
     $content = $_POST["content"];
     $qestionId = $_POST["questionId"];
-    $mariadb->createAnswer(new ForumAnswer(0, $content, $id->getID(), $qestionId));
+    $mariadb->createAnswer(new ForumAnswer(0, $content, $currentUser->getID(), $qestionId));
+} elseif (isset($_POST["deleteQuestion"])) {
+    $question = $mariadb->findQuestion($_POST["questionId"] );
+    if ($question) {
+        if ($question->getUserId() == $currentUser->getID())
+        {
+            $mariadb->deleteQuestion($question->getID());
+        }
+    }
 }
+
 
 
 Head::printHead("Forum", "/forum/forumIndex.css");
 
 ?>
 <!doctype html>
-<html lang="de">
+<html lang=de>
 
 <body>
 
@@ -56,10 +65,8 @@ if (empty($questions)) {
 } else {
 $cnt = 0;
 foreach ($questions
-
 as $question) {
 ?>
-
 <div class="accordion" id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
@@ -67,23 +74,29 @@ as $question) {
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapse<?php echo $cnt; ?>" aria-expanded="false"
                     aria-controls="collapse<?php echo $cnt; ?>">
-
-                <?php echo $question->getSubject() ?>
+                <?php
+                echo $question->getSubject();
+                if ($currentUser->getID() == $question->getUserId()) {
+                    echo " (Meine Frage)";
+                }
+                ?>
             </button>
-
         </h2>
-        <div id="collapse<?php echo $cnt; ?>" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-             data-bs-parent="#accordionExample">
+        <div id="collapse<?php echo $cnt; ?>" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 <div class="row">
-                    <div class="col-10"><b><?php echo $question->getQuestion() ?></b> <br>
+                    <div class="col-10"><b><span id="question-<?php echo $question->getID()?>"><?php echo htmlspecialchars($question->getQuestion()) ?></span></b> <br>
                         <button class="btn btn-outline-primary"
-                                onclick='openAnswerModal(<?php echo $question->getID() ?>, "<?php echo $question->getQuestion(); ?>")'>
+                                onclick='openAnswerModal(<?php echo $question->getID() ?>, "question-<?php echo $question->getID()?>")'>
                             Antworten
                         </button>
                         <?php
-                        if ($id->getID() == $question->getUserId()) {
-                            ?><button type="button" class="btn btn-danger">Frage löschen</button><?php
+                        if ($currentUser->getID() == $question->getUserId()) {
+                            ?>
+                            <form method="post">
+                                <input type="hidden" name="questionId" value="<?php echo $question->getID()?>">
+                                <button type="submit" class="btn btn-danger" name="deleteQuestion">Frage löschen</button>
+                            </form><?php
                         }
                         ?>
                     </div>
@@ -102,17 +115,17 @@ as $question) {
                         $count = 1;
                         foreach ($questionsAnswer as $questionAnswer) {
                             ?>
-                            <div class="answereCard">
-                                <div class="card" id="answereCard">
+                            <div class="answerCard">
+                                <div class="card" id="answerCard">
                                     <h5 class="card-header">Antwort #<?php echo $count ?></h5>
                                     <div class="card-body">
                                         <p class="card-text"><?php echo $questionAnswer->getAnswer();?></p>
                                     </div>
                                 </div>
-
                             </div>
                             <?php
                             $count++;
+
 
 
                         }

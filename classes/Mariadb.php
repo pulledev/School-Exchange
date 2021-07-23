@@ -109,5 +109,22 @@ class Mariadb
 
         return null;
     }
+    function deleteQuestion(int $id)
+    {
+        $this->pdo()->query("DELETE FROM forum_quest WHERE ID = ".$id);
+        $this->pdo()->query("DELETE FROM forum_reply WHERE questionId = ".$id);
+    }
+
+    function findQuestion(int $id):?ForumQuestion
+    {
+        $res = $this->pdo()->query("SELECT * FROM forum_quest WHERE ID = ".$id);
+        if ($row = $res->fetch()) {
+            return new ForumQuestion($row["quest"], $row["userID"], $row["sort"], $row["head"], $row["ID"]);
+        } else {
+            return null;
+        }
+
+    }
+
 }
 
