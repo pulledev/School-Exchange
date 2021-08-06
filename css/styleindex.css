@@ -1,0 +1,26 @@
+.headline{
+    padding-top: 1vw;
+    padding-bottom: 3vw;
+    text-align: center;
+}
+.headline2{
+    padding-top: 3vw;
+    padding-bottom: 1vw;
+    text-align: center;
+}
+#btn{
+    margin-left: 1vw;
+}
+.tile{
+
+    text-align: center;
+}
+#card{
+    text-align: center;
+    display: inline-block;
+    align-items: center;
+}
+#progress{
+    height: 2vw;
+    margin-bottom: 3vw;
+}

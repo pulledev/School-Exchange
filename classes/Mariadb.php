@@ -1,5 +1,6 @@
 <?php
 
+
 class Mariadb
 {
     private $host;
@@ -12,6 +13,11 @@ class Mariadb
      * Mariadb constructor.
      * @param Config $config
      */
+    public static function checkTables ()
+    {
+
+    }
+
     public function __construct(Config $config)
     {
         $this->host = $config->getValue('dbhost');
@@ -90,7 +96,6 @@ class Mariadb
             error_log("Found User:" . $row["username"]);
             return new User($row["username"], $row["ID"], $row["rank"], $row["email"]);
         }
-
         return null;
     }
 

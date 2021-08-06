@@ -98,4 +98,56 @@ class Navbar
 
 
     }
+
+    static function printNavbarIndex($active)
+    {
+        $home = null;
+        $docs = null;
+        $example = null;
+        switch ($active) {
+            case "home":
+                $home = "active";
+                break;
+            case "docs":
+                $docs = "active";
+                break;
+            case "example":
+                $example = "active";
+                break;
+        }
+
+        ?>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navigation</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                <aria-controls
+                ="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $home ?> " href="../index.php">Home</a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $docs; ?>" href="../forum/index.php">Docs</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $example; ?>" href="../getcodep.php">Beispiele</a>
+                        </li>
+                    </ul>
+                    <a href="login.php" class="btn btn-primary btn-sm">Anmelden</a>
+                    <div><a href="register.php" class="btn btn-primary btn-sm" id="btn">Registrieren</a></div>
+                </div>
+            </div>
+
+        </nav>
+        <?php
+    }
 }
