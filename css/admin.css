@@ -1,0 +1,15 @@
+.head{
+    text-align: center;
+}
+#longQuestion{
+    margin-top: 4vw;
+    margin-bottom: 1vw;
+}
+
+.answereCard{
+    padding-top: 1.5vw;
+
+}
+#adminButton{
+    width: 200px;
+}

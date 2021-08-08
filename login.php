@@ -42,7 +42,7 @@ if (isset($_POST["send"])) {
         echo $res;
     }
 
-    $checkUserByName = ShoolExchangeServices::getInstance()->getMariadb()->findUserByName($username,$password);
+    $checkUserByName = SchoolExchangeServices::getInstance()->getMariadb()->findUserByName($username,$password);
 
 
 

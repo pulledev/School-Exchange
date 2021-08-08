@@ -131,5 +131,18 @@ class Mariadb
 
     }
 
+    function listUser(): array
+    {
+        $res = $this->pdo()->query("SELECT * FROM `user`");
+        $resultsUser = [];
+        while ($row = $res->fetch()) {
+            $resultsUser[] = new User($row["username"],$row["ID"],$row["rank"],$row["email"]);
+        }
+        return $resultsUser;
+    }
+    function deleteUser(int $id)
+    {
+        $this->pdo()->query("DELETE FROM `user` WHERE ID = ".$id);
+    }
 }
 

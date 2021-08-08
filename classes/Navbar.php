@@ -34,7 +34,7 @@ class Navbar
             $home = "active";
             $navTitle = "Home";
         }
-
+        $mariadb = SchoolExchangeServices::getInstance()->getMariadb();
 
         ?>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -69,29 +69,33 @@ class Navbar
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link <?php echo $adminPanel; ?>" href="../getcodep.php">Admin Panel</a>
+                            <a class="nav-link <?php echo $adminPanel; ?>" href="../admin.php">Admin Panel</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link <?php echo $settings; ?>" href="../settings.php">Einstellungen</a>
                         </li>
+
                     </ul>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown" style="padding-right: 3vw;">
+
+                            <a class="nav-link dropdown-toggle <?php echo $learn; ?>" href="#" id="navbarDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Hi <?php echo $user; ?>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item " href="#">Deine Statistiken</a></li>
+                                <li><a class="dropdown-item" href="../settings.php">Einstellungen</a></li>
+                                <li><a class="dropdown-item " href="../logout.php">Abmelden</a></li>
+                            </ul>
+
+                        </li>
+                    </ul>
+
                 </div>
             </div>
-            <div class="d-flex align-items-center">
-                <li class="nav-item">
-                    <a class="nav-link dropdown-toggle <?php echo $learn; ?>" href="#" id="navbarDropdown"
-                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Lernen
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="../Definitions/index.php">Erklärungen</a></li>
-                        <li><a class="dropdown-item " href="#">Aufgaben</a></li>
-                        <li><a class="dropdown-item " href="../groups/index.php">Lerngruppe</a></li>
-                    </ul>
-                </li>
 
-
-            </div>
             <!-- Right elements -->
         </nav>
         <?php
@@ -139,7 +143,7 @@ class Navbar
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link <?php echo $example; ?>" href="../getcodep.php">Beispiele</a>
+                            <a class="nav-link <?php echo $example; ?>" href="../admin.php">Beispiele</a>
                         </li>
                     </ul>
                     <a href="login.php" class="btn btn-primary btn-sm">Anmelden</a>

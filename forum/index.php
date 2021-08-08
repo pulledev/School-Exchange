@@ -27,8 +27,6 @@ if (isset($_POST["createQuestion"])) {
     }
 }
 
-
-
 Head::printHead("Forum", "/forum/forumIndex.css");
 
 ?>
@@ -36,7 +34,6 @@ Head::printHead("Forum", "/forum/forumIndex.css");
 <html lang=de>
 
 <body>
-
 
 <?php Navbar::printNavbar("forum"); ?>
 
@@ -49,7 +46,6 @@ Head::printHead("Forum", "/forum/forumIndex.css");
                     data-bs-target="#newQuestionModal">
                 Neue Frage
             </button>
-
         </div>
     </div>
 

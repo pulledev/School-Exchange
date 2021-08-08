@@ -65,4 +65,5 @@ class User
         <a href="mailto:<?php echo $this->getEmail()?>"><?php echo $this->getUsername()?></a>
         <?php
     }
+
 }
