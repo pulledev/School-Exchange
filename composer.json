@@ -1,14 +1,17 @@
 {
-  "name": "vendor_name/school_exchange",
-  "description": "description",
-  "minimum-stability": "stable",
-  "license": "proprietary",
-  "authors": [
-    {
-      "name": "pmtre",
-      "email": "email@example.com"
+    "name": "php-fidder/core",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PhpFidder\\Core\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "league/route": "^5.1",
+        "monolog/monolog": "^3.4",
+        "league/event": "^3.0",
+        "symfony/mailer": "^6.3"
     }
-  ],
-  "require": {
-  }
 }
